@@ -3,10 +3,7 @@ package school.cesar.unit;
 import java.time.Instant;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EmailAccount {
 
@@ -66,10 +63,10 @@ public class EmailAccount {
         this.emails = emails;
     }
 
-    public boolean verifyPasswordExpiration(){
+    public boolean verifyPasswordExpiration() {
 
         Instant expiration = Instant.now().plus(Period.ofDays(90));
-        if(this.lastPasswordUpdate.isAfter(expiration)){
+        if (this.lastPasswordUpdate.isAfter(expiration)) {
             return true;
         }
 

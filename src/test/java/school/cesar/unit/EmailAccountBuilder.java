@@ -12,36 +12,36 @@ public class EmailAccountBuilder {
     public Instant lastPasswordUpdate;
     Collection<Email> emails = new ArrayList<>();
 
-    public EmailAccountBuilder(){
+    public EmailAccountBuilder() {
 
     }
 
-    public EmailAccountBuilder setEmailsList(Collection<Email> emails){
+    public EmailAccountBuilder setEmailsList(Collection<Email> emails) {
         this.emails = emails;
         return this;
     }
 
-    public EmailAccountBuilder setUser(String user){
+    public EmailAccountBuilder setUser(String user) {
         this.user = user;
         return this;
     }
 
-    public EmailAccountBuilder setDomain(String domain){
+    public EmailAccountBuilder setDomain(String domain) {
         this.domain = domain;
         return this;
     }
 
-    public EmailAccountBuilder setPassword(String password){
+    public EmailAccountBuilder setPassword(String password) {
         this.password = password;
         return this;
     }
 
-    public EmailAccountBuilder setLastPasswordUpdate(Instant lastPasswordUpdate){
+    public EmailAccountBuilder setLastPasswordUpdate(Instant lastPasswordUpdate) {
         this.lastPasswordUpdate = lastPasswordUpdate;
         return this;
     }
 
-    public EmailAccount build(){
-        return new EmailAccount (user, domain, password, lastPasswordUpdate, emails);
+    public EmailAccount build() {
+        return new EmailAccount(user, domain, password, lastPasswordUpdate, emails);
     }
 }

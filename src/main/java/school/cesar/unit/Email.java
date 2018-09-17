@@ -14,8 +14,8 @@ public class Email {
     private String subject = "";
     private String message = "";
 
-    public Email (Instant creationDate, String from, Collection<String> to,
-                  Collection<String> cc, Collection<String> bcc, String subject, String message) {
+    public Email(Instant creationDate, String from, Collection<String> to,
+                 Collection<String> cc, Collection<String> bcc, String subject, String message) {
         this.setCreationDate(creationDate);
         this.setFrom(from);
         this.setTo(to);

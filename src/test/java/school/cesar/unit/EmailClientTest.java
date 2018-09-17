@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import school.cesar.unit.mocking.MockitoExtension;
 
 import java.time.Instant;
@@ -25,21 +24,23 @@ public class EmailClientTest {
     private EmailAccount emailAccount2;
     private EmailAccount emailAccount3;
     private EmailAccount emailAccount4;
-    @InjectMocks EmailClient emailClient;
-    @Mock EmailService service;
+    @InjectMocks
+    EmailClient emailClient;
+    @Mock
+    EmailService service;
     private ArrayList<String> toList;
     private ArrayList<String> badToList;
     private ArrayList<String> ccList;
     private ArrayList<String> bccList;
     private Collection<Email> emails;
 
-    public void setService(EmailService svc){
-        this.service=svc;
+    public void setService(EmailService svc) {
+        this.service = svc;
     }
 
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
 
         toList = new ArrayList<>(Arrays.asList("xyz@gmail.com", "abc@gmail.com"));
         badToList = new ArrayList<>(Arrays.asList("xyz_gmail.com"));
@@ -108,72 +109,72 @@ public class EmailClientTest {
                 .setLastPasswordUpdate(Instant.now().plus(Period.ofDays(8)))
                 .build();
 
-       // emailClient = new EmailClient();
+        // emailClient = new EmailClient();
     }
 
     @Test
-    public void verifyPasswordExpired(){
+    public void verifyPasswordExpired() {
         Assertions.assertTrue(emailAccount2.verifyPasswordExpiration());
     }
 
     @Test
-    public void isValidEmailAddress(){
+    public void isValidEmailAddress() {
         Assertions.assertTrue(emailClient.isValidAddress(email.getFrom()));
     }
 
     @Test
-    public void isNotValidEmailAddress(){
+    public void isNotValidEmailAddress() {
         Assertions.assertFalse(emailClient.isValidAddress(badEmail1.getFrom()));
     }
 
     @Test
-    public void isValidEmail(){
+    public void isValidEmail() {
         Assertions.assertTrue(emailClient.isValidEmail(email));
     }
 
     @Test
-    public void isNotValidEmail_address(){
+    public void isNotValidEmail_address() {
         Assertions.assertFalse(emailClient.isValidEmail(badEmail1));
     }
 
     @Test
-    public void isNotValidEmail_toList(){
+    public void isNotValidEmail_toList() {
         Assertions.assertFalse(emailClient.isValidEmail(badEmail2));
     }
 
     @Test
-    public void isValidPassword(){
+    public void isValidPassword() {
         Assertions.assertTrue(emailClient.isValidPassword(emailAccount1));
     }
 
     @Test
-    public void isNotValidPassword(){
+    public void isNotValidPassword() {
         Assertions.assertFalse(emailClient.isValidPassword(emailAccount3));
     }
 
     @Test
-    public void canCreateAccount_true(){
+    public void canCreateAccount_true() {
         Assertions.assertTrue(emailClient.createAccount(emailAccount1));
     }
 
     @Test
-    public void canCreateAccount_false_badPassword(){
+    public void canCreateAccount_false_badPassword() {
         Assertions.assertFalse(emailClient.createAccount(emailAccount3));
     }
 
     @Test
-    public void canCreateAccount_false_badAddress(){
+    public void canCreateAccount_false_badAddress() {
         Assertions.assertFalse(emailClient.createAccount(emailAccount4));
     }
 
     @Test
-    public void canSendEmail_true(){
+    public void canSendEmail_true() {
         emailClient.setEmailService(service);
         Assertions.assertTrue(emailClient.sendEmail(email));
     }
 
     @Test
-    public void canSendEmail_false(){
+    public void canSendEmail_false() {
         emailClient.setEmailService(service);
         Assertions.assertThrows(RuntimeException.class, () -> {
             emailClient.sendEmail(badEmail1);
@@ -181,12 +182,12 @@ public class EmailClientTest {
     }
 
     @Test
-    public void returnsEmailsList(){
+    public void returnsEmailsList() {
         Assertions.assertNotNull(emailClient.emailList(emailAccount1));
     }
 
     @Test
-    public void exceptionWhenReturningEmailsList() throws RuntimeException{
+    public void exceptionWhenReturningEmailsList() throws RuntimeException {
 
         Assertions.assertThrows(RuntimeException.class, () -> {
             emailClient.emailList(emailAccount2);
